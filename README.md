@@ -87,15 +87,7 @@ Crie o arquivo `.env` baseado no `.env.example`:
 cp .env.example .env
 ```
 
-Edite o `.env` com suas configurações:
-
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/arena_pontel
-JWT_SECRET=sua-chave-secreta-aqui
-JWT_REFRESH_SECRET=sua-chave-refresh-aqui
-PORT=3001
-FRONTEND_URL=http://localhost:5173
-```
+Edite o `.env` com suas configurações (veja o `.env.example` como referência).
 
 Configure o banco de dados:
 
@@ -140,77 +132,6 @@ O sistema vem com 28 planos pré-configurados:
 - **Locação de Quadras** - Avulso, Mensal (1h e 1h30)
 - **Personal William Trajano** - Avulso, Mensal (1x, 2x, 3x por semana)
 
-## Endpoints da API
-
-### Autenticação (`/api/auth`)
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| POST | `/register` | Cadastro |
-| POST | `/login` | Login |
-| POST | `/refresh-token` | Renovar token |
-| POST | `/forgot-password` | Solicitar reset |
-| POST | `/reset-password/:token` | Resetar senha |
-| GET | `/me` | Dados do usuário logado |
-
-### Usuários (`/api/users`)
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/profile` | Perfil |
-| PUT | `/profile` | Atualizar perfil |
-| PUT | `/change-password` | Alterar senha |
-| PUT | `/upload-avatar` | Upload de foto |
-| GET | `/admin/all` | Listar alunos (admin) |
-| GET | `/admin/stats` | Estatísticas (admin) |
-| POST | `/admin/create` | Criar aluno (admin) |
-| PUT | `/admin/:id` | Editar aluno (admin) |
-| DELETE | `/admin/:id` | Excluir aluno (admin) |
-| POST | `/admin/:id/plan` | Atribuir plano (admin) |
-| DELETE | `/admin/:id/plan` | Remover plano (admin) |
-
-### Planos (`/api/plans`)
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/` | Listar planos |
-| GET | `/:id` | Detalhes do plano |
-| POST | `/` | Criar (admin) |
-| PUT | `/:id` | Atualizar (admin) |
-| DELETE | `/:id` | Deletar (admin) |
-
-### Agendamentos (`/api/bookings`)
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/public/schedule` | Agenda pública (sem auth) |
-| GET | `/` | Meus agendamentos |
-| GET | `/available` | Horários disponíveis |
-| POST | `/` | Criar agendamento |
-| DELETE | `/:id` | Cancelar |
-| GET | `/admin/all` | Todos (admin) |
-
-**Tipos de quadra:**
-- `FUTEVOLEI` - Futevôlei (1h)
-- `BEACH_TENNIS` - Beach Tênis (1h)
-- `LOCACAO` - Locação de Quadra (1h30)
-- `EVENTO` - Evento (1h)
-
-### Assinaturas (`/api/subscriptions`)
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/my-subscription` | Minha assinatura |
-| POST | `/subscribe` | Contratar plano |
-| PUT | `/cancel` | Cancelar plano |
-
-### Contato (`/api/contact`)
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| POST | `/` | Enviar mensagem |
-
-### Galeria (`/api/gallery`)
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/` | Listar imagens |
-| POST | `/` | Upload (admin) |
-| DELETE | `/:id` | Deletar (admin) |
-
 ## Scripts Disponíveis
 
 ### Backend
@@ -241,16 +162,9 @@ cd frontend && npm run build
   - `VITE_API_URL` - URL do backend
   - `VITE_WHATSAPP_NUMBER` - Número do WhatsApp
 
-### Backend (Railway/Render)
-- Configure as variáveis de ambiente:
-  - `DATABASE_URL` - URL do PostgreSQL (Supabase)
-  - `JWT_SECRET` - Chave secreta JWT
-  - `JWT_REFRESH_SECRET` - Chave refresh JWT
-  - `FRONTEND_URL` - URL do frontend
+### Backend
+- Configure as variáveis de ambiente conforme o `.env.example`
 - O Prisma migration roda automaticamente no deploy
-
-### Banco de Dados (Supabase)
-- Projeto hospedado no Supabase (PostgreSQL)
 
 ## Funcionalidades
 
