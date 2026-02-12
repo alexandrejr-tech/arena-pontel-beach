@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build
+frontend/dist/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Uploads
+backend/uploads/avatars/*
+backend/uploads/gallery/*
+!backend/uploads/avatars/.gitkeep
+!backend/uploads/gallery/.gitkeep
+
+# Prisma
+backend/prisma/migrations/
+
+# Temp
+*.tmp

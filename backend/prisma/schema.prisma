@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String        @id @default(uuid())
+  name          String
+  email         String        @unique
+  password      String
+  cpf           String        @unique
+  phone         String?
+  avatar        String?
+  role          Role          @default(USER)
+  refreshToken  String?
+  resetToken    String?
+  resetTokenExp DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  bookings      Booking[]
+  subscription  Subscription?
+
+  @@map("users")
+}
+
+model Plan {
+  id            String         @id @default(uuid())
+  name          String
+  description   String
+  price         Float
+  duration      Int
+  benefits      String[]
+  active        Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  subscriptions Subscription[]
+
+  @@map("plans")
+}
+
+model Subscription {
+  id        String             @id @default(uuid())
+  userId    String             @unique
+  planId    String
+  status    SubscriptionStatus @default(ACTIVE)
+  startDate DateTime           @default(now())
+  endDate   DateTime
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan      Plan               @relation(fields: [planId], references: [id])
+
+  @@map("subscriptions")
+}
+
+model Booking {
+  id        String        @id @default(uuid())
+  userId    String
+  courtType CourtType
+  date      DateTime
+  startTime String
+  endTime   String
+  status    BookingStatus @default(CONFIRMED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("bookings")
+}
+
+model Contact {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("contacts")
+}
+
+model Gallery {
+  id          String   @id @default(uuid())
+  imageUrl    String
+  description String?
+  category    String?
+  createdAt   DateTime @default(now())
+
+  @@map("gallery")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum CourtType {
+  FUTEVOLEI
+  BEACH_TENNIS
+  LOCACAO
+  EVENTO
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+}

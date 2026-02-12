@@ -1,0 +1,58 @@
+export const PLAN_CATEGORIES = [
+  {
+    id: 'futevolei',
+    name: 'Futevôlei',
+    icon: '⚽',
+    plans: [
+      { name: 'Mensal 1x/semana', price: 209.99, period: 'mês', frequency: '1x na semana', duration: 'Mensal' },
+      { name: 'Mensal 2x/semana', price: 299.99, period: 'mês', frequency: '2x na semana', duration: 'Mensal' },
+      { name: 'Mensal 3x/semana', price: 399.99, period: 'mês', frequency: '3x na semana', duration: 'Mensal' },
+      { name: 'Trimestral 1x/semana', price: 63.33, period: 'mês', frequency: '1x na semana', duration: 'Trimestral' },
+      { name: 'Trimestral 2x/semana', price: 269.99, period: 'mês', frequency: '2x na semana', duration: 'Trimestral' },
+      { name: 'Trimestral 3x/semana', price: 359.99, period: 'mês', frequency: '3x na semana', duration: 'Trimestral' },
+      { name: 'Semestral 1x/semana', price: 169.99, period: 'mês', frequency: '1x na semana', duration: 'Semestral' },
+      { name: 'Semestral 2x/semana', price: 239.99, period: 'mês', frequency: '2x na semana', duration: 'Semestral' },
+      { name: 'Semestral 3x/semana', price: 319.99, period: 'mês', frequency: '3x na semana', duration: 'Semestral' },
+    ],
+  },
+  {
+    id: 'beach-tennis',
+    name: 'Beach Tênis',
+    icon: '🎾',
+    plans: [
+      { name: 'Mensal 1x/semana', price: 239.99, period: 'mês', frequency: '1x na semana', duration: 'Mensal' },
+      { name: 'Mensal 2x/semana', price: 369.99, period: 'mês', frequency: '2x na semana', duration: 'Mensal' },
+      { name: 'Mensal 3x/semana', price: 529.99, period: 'mês', frequency: '3x na semana', duration: 'Mensal' },
+      { name: 'Trimestral 1x/semana', price: 209.99, period: 'mês', frequency: '1x na semana', duration: 'Trimestral' },
+      { name: 'Trimestral 2x/semana', price: 309.99, period: 'mês', frequency: '2x na semana', duration: 'Trimestral' },
+      { name: 'Trimestral 3x/semana', price: 439.99, period: 'mês', frequency: '3x na semana', duration: 'Trimestral' },
+      { name: 'Semestral 1x/semana', price: 179.99, period: 'mês', frequency: '1x na semana', duration: 'Semestral' },
+      { name: 'Semestral 2x/semana', price: 339.99, period: 'mês', frequency: '2x na semana', duration: 'Semestral' },
+      { name: 'Semestral 3x/semana', price: 389.99, period: 'mês', frequency: '3x na semana', duration: 'Semestral' },
+    ],
+  },
+  {
+    id: 'locacao',
+    name: 'Locação de Quadras',
+    icon: '🏐',
+    plans: [
+      { name: 'Quadra 1h', price: 129.99, period: null, frequency: null, duration: 'Avulso' },
+      { name: 'Quadra 1h30', price: 199.99, period: null, frequency: null, duration: 'Avulso' },
+      { name: 'Quadra Mensal 1h', price: 519.99, period: 'mês', frequency: null, duration: 'Mensal' },
+      { name: 'Quadra Mensal 1h30', price: 759.99, period: 'mês', frequency: null, duration: 'Mensal' },
+    ],
+  },
+  {
+    id: 'personal',
+    name: 'Personal William Trajano',
+    icon: '🏋️',
+    plans: [
+      { name: 'Individual Avulso', price: 140.00, period: null, frequency: null, duration: 'Avulso' },
+      { name: 'Individual Performance - Básico', price: 480.00, period: null, frequency: null, duration: 'Pacote' },
+      { name: 'Individual Elite/Competição', price: 700.00, period: null, frequency: null, duration: 'Pacote' },
+      { name: 'Dupla Avulso', price: 180.00, period: null, frequency: null, duration: 'Avulso' },
+      { name: 'Dupla Performance - Básico', price: 550.00, period: null, frequency: null, duration: 'Pacote' },
+      { name: 'Dupla Elite/Competição', price: 900.00, period: null, frequency: null, duration: 'Pacote' },
+    ],
+  },
+];
