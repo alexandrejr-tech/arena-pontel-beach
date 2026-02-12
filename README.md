@@ -122,8 +122,6 @@ Inicie o frontend:
 npm run dev
 ```
 
-Acesse: **http://localhost:5173**
-
 ## Planos Disponíveis
 
 O sistema vem com 28 planos pré-configurados:
@@ -150,21 +148,6 @@ npm run dev       # Servidor de desenvolvimento
 npm run build     # Build de produção
 npm run preview   # Preview do build
 ```
-
-## Deploy
-
-### Frontend (Netlify)
-```bash
-cd frontend && npm run build
-```
-- O arquivo `netlify.toml` já está configurado
-- Variáveis de ambiente na Netlify:
-  - `VITE_API_URL` - URL do backend
-  - `VITE_WHATSAPP_NUMBER` - Número do WhatsApp
-
-### Backend
-- Configure as variáveis de ambiente conforme o `.env.example`
-- O Prisma migration roda automaticamente no deploy
 
 ## Funcionalidades
 
