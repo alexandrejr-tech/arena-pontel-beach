@@ -8,10 +8,10 @@ const { welcomeEmail, passwordResetEmail } = require('../utils/emailTemplates');
 
 const generateTokens = (userId) => {
   const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '15m',
+    expiresIn: 900, // 15 minutos
   });
   const refreshToken = jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET, {
-    expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
+    expiresIn: 604800, // 7 dias
   });
   return { accessToken, refreshToken };
 };
