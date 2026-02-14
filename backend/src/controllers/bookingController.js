@@ -107,12 +107,23 @@ exports.createBooking = async (req, res, next) => {
     const { courtType, date, startTime, endTime } = req.body;
 
     const bookingDate = new Date(date);
-    if (bookingDate < new Date()) {
+    const today = new Date();
+    const todayDate = new Date(today);
+    todayDate.setHours(0, 0, 0, 0);
+    if (bookingDate < todayDate) {
       throw new AppError('Não é possível agendar em datas passadas.', 400);
     }
 
-    // Verifica conflito considerando sobreposição de horários
+    // Se for hoje, bloqueia horários que já passaram
     const startMins = timeToMinutes(startTime);
+    if (bookingDate.getTime() === todayDate.getTime()) {
+      const nowMins = today.getHours() * 60 + today.getMinutes();
+      if (startMins <= nowMins) {
+        throw new AppError('Este horário já passou.', 400);
+      }
+    }
+
+    // Verifica conflito considerando sobreposição de horários
     const endMins = timeToMinutes(endTime);
 
     const existingBookings = await prisma.booking.findMany({
@@ -210,10 +221,19 @@ exports.getPublicSchedule = async (req, res, next) => {
     const openMins = openHour * 60;
     const closeMins = closeHour * 60;
 
+    // Verifica se é hoje para filtrar horários passados
+    const now = new Date();
+    const todayStr = now.toISOString().split('T')[0];
+    const isToday = date === todayStr;
+    const nowMins = now.getHours() * 60 + now.getMinutes();
+
     for (let startMins = openMins; startMins + duration <= closeMins; startMins += step) {
       const endMins = startMins + duration;
       const startTime = minutesToTime(startMins);
       const endTime = minutesToTime(endMins);
+
+      // Se for hoje, marca horários passados como indisponíveis
+      const isPast = isToday && startMins <= nowMins;
 
       // Verifica se está ocupado para cada tipo de quadra
       const bookedTypes = [];
@@ -227,7 +247,7 @@ exports.getPublicSchedule = async (req, res, next) => {
         }
       }
 
-      const available = courtType
+      const available = isPast ? false : courtType
         ? !isSlotConflicting(startMins, endMins, existingBookings, courtType)
         : bookedTypes.length === 0;
 
@@ -235,7 +255,7 @@ exports.getPublicSchedule = async (req, res, next) => {
         startTime,
         endTime,
         available,
-        bookedFor: bookedTypes,
+        bookedFor: isPast ? ['PAST'] : bookedTypes,
         duration
       });
     }
